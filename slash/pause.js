@@ -5,7 +5,7 @@ module.exports = {
 	run: async ({ client, interaction }) => {
 		const queue = client.player.getQueue(interaction.guildId)
 
-		if (!queue) return await interaction.editReply("There are no songs in the queue")
+		if (!queue) return await interaction.editReply("Queue is empty, try `/play` to add songs")
 
 		queue.setPaused(true)
         await interaction.editReply("Music has been paused! Use `/resume` to resume the music")

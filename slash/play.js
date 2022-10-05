@@ -21,13 +21,13 @@ module.exports = {
 		.addSubcommand((subcommand) =>
 			subcommand
 				.setName("search")
-				.setDescription("Searches for sogn based on provided keywords")
+				.setDescription("Fetches for a song based on keywords")
 				.addStringOption((option) =>
 					option.setName("searchterms").setDescription("the search keywords").setRequired(true)
 				)
 		),
 	run: async ({ client, interaction }) => {
-		if (!interaction.member.voice.channel) return interaction.editReply("You need to be in a VC to use this command")
+		if (!interaction.member.voice.channel) return interaction.editReply("Oh no! you're not in a voice chat :((")
 
 		const queue = await client.player.createQueue(interaction.guild)
 		if (!queue.connection) await queue.connect(interaction.member.voice.channel)
