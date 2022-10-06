@@ -10,7 +10,7 @@ Just search up a song or playlist and I'll play it for you ~ ♪
 
 ## Commands
 
-- /info - Displays info about the song currently playing
+- /currentlyplaying - Displays info about the song currently playing
 - /pause - Pauses the music
 - /play - Loads songs from youtube
 - /queue - Displays the current song queue
