@@ -2,7 +2,6 @@ const Discord = require("discord.js")
 const dotenv = require("dotenv")
 const { REST } = require("@discordjs/rest")
 const { Routes } = require("discord-api-types/v9")
-const fs = require("fs")
 const { Player } = require("discord-player")
 
 dotenv.config()
@@ -23,9 +22,9 @@ const client = new Discord.Client({
         "GUILDS",
         "GUILD_MESSAGES",
         "GUILD_VOICE_STATES"
-      ],
-      allowedMentions: { parse: ["roles", "users"], repliedUser: false }
-    });
+    ],
+    allowedMentions: { parse: ["roles", "users"], repliedUser: false }
+});
 
 client.logger = Logger;
 client.utils = Util;
@@ -43,7 +42,7 @@ let commands = []
 
 const cmds = require('./slash');
 
-for (const slashcmd of cmds){
+for (const slashcmd of cmds) {
     client.slashcommands.set(slashcmd.data.name, slashcmd)
     if (LOAD_SLASH) commands.push(slashcmd.data.toJSON())
 }
@@ -51,11 +50,11 @@ for (const slashcmd of cmds){
 if (LOAD_SLASH) {
     const rest = new REST({ version: "9" }).setToken(TOKEN)
     console.log("Deploying commands...")
-    rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {body: commands})
-    .then(() => {
-        console.log("Successfully deployed all commands")
-    })
-    .catch(console.log)
+    rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), { body: commands })
+        .then(() => {
+            console.log("Successfully deployed all commands")
+        })
+        .catch(console.log)
 }
 
 client.on("ready", () => {

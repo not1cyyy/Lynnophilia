@@ -8,6 +8,6 @@ module.exports = {
 		if (!queue) return await interaction.editReply("Queue is empty, try `/play` to add songs")
 
 		queue.destroy()
-        await interaction.editReply("Take care everyone <33!")
+		await interaction.editReply("Take care everyone <33!")
 	},
 }

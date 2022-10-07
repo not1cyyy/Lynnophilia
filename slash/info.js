@@ -4,14 +4,14 @@ const { version: djsVersion, MessageActionRow, MessageButton } = require("discor
 
 module.exports = {
   data: new SlashCommandBuilder().setName("info").setDescription("Displays info about the bot"),
-  run: async ({client, interaction}) => {
+  run: async ({ client, interaction }) => {
     const util = client.utils;
     const uptime = util.formatDuration(client.uptime);
     const createdAt = `<t:${client.user.createdTimestamp}:R>`
     const users = client.guilds.cache.reduce((a, g) => a + g.memberCount, 0);
 
     const embed = client.say.baseEmbed(interaction)
-      .setAuthor({name: client.user.username})
+      .setAuthor({ name: client.user.username })
       .addField("General Info",
         `**Bot Id:** ${client.user.id}
         **Bot Tag:** ${client.user.tag}

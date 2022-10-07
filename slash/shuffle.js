@@ -8,6 +8,6 @@ module.exports = {
 		if (!queue) return await interaction.editReply("Queue is empty, try `/play` to add songs")
 
 		queue.shuffle()
-        await interaction.editReply(`The queue of ${queue.tracks.length} songs have been shuffled!`)
+		await interaction.editReply(`The queue of ${queue.tracks.length} songs have been shuffled!`)
 	},
 }
