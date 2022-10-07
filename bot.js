@@ -41,9 +41,9 @@ client.player = new Player(client, {
 
 let commands = []
 
-const slashFiles = fs.readdirSync("./slash").filter(file => file.endsWith(".js"))
-for (const file of slashFiles){
-    const slashcmd = require(`./slash/${file}`)
+const cmds = require('./slash');
+
+for (const slashcmd of cmds){
     client.slashcommands.set(slashcmd.data.name, slashcmd)
     if (LOAD_SLASH) commands.push(slashcmd.data.toJSON())
 }
@@ -54,30 +54,23 @@ if (LOAD_SLASH) {
     rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {body: commands})
     .then(() => {
         console.log("Successfully deployed all commands")
-        process.exit(0)
     })
-    .catch((err) => {
-        if (err){
-            console.log(err)
-            process.exit(1)
-        }
-    })
+    .catch(console.log)
 }
-else {
-    client.on("ready", () => {
-        console.log(`${client.user.tag} is up and ready`)
-    })
-    client.on("interactionCreate", (interaction) => {
-        async function handleCommand() {
-            if (!interaction.isCommand()) return
 
-            const slashcmd = client.slashcommands.get(interaction.commandName)
-            if (!slashcmd) interaction.reply("I don't know this command, sorry...")
+client.on("ready", () => {
+    console.log(`${client.user.tag} is up and ready`)
+})
+client.on("interactionCreate", (interaction) => {
+    async function handleCommand() {
+        if (!interaction.isCommand()) return
 
-            await interaction.deferReply()
-            await slashcmd.run({ client, interaction })
-        }
-        handleCommand()
-    })
-    client.login(TOKEN)
-}
+        const slashcmd = client.slashcommands.get(interaction.commandName)
+        if (!slashcmd) interaction.reply("I don't know this command, sorry...")
+
+        await interaction.deferReply()
+        await slashcmd.run({ client, interaction })
+    }
+    handleCommand()
+})
+client.login(TOKEN)
