@@ -4,6 +4,7 @@ const { REST } = require("@discordjs/rest")
 const { Routes } = require("discord-api-types/v9")
 const fs = require("fs")
 const { Player } = require("discord-player")
+const chalk = import("chalk");
 
 dotenv.config()
 const TOKEN = process.env.TOKEN
@@ -13,12 +14,23 @@ const LOAD_SLASH = process.argv[2] == "deploy"
 const CLIENT_ID = "1027188789568868363"
 const GUILD_ID = "921070549113905212"
 
+const Logger = require("./modules/Logger");
+const Embeds = require("./modules/Embeds");
+const Util = require("./modules/Util");
+
+
 const client = new Discord.Client({
     intents: [
         "GUILDS",
+        "GUILD_MESSAGES",
         "GUILD_VOICE_STATES"
-    ]
-})
+      ],
+      allowedMentions: { parse: ["roles", "users"], repliedUser: false }
+    });
+
+client.logger = Logger;
+client.utils = Util;
+client.say = Embeds;
 
 client.slashcommands = new Discord.Collection()
 client.player = new Player(client, {

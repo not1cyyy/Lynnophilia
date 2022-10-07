@@ -4,31 +4,30 @@ const { version: djsVersion, MessageActionRow, MessageButton } = require("discor
 
 module.exports = {
   data: new SlashCommandBuilder().setName("info").setDescription("Shows info about the bot"),
-  async execute(bot, interaction) {
-    const util = bot.utils;
-    const uptime = util.formatDuration(bot.uptime);
-    const createdAt = `<t:${bot.user.createdTimestamp}:R>`
-    const users = bot.guilds.cache.reduce((a, g) => a + g.memberCount, 0);
+  run: async ({ client, interaction }) => {
+    const util = client.utils;
+    const uptime = util.formatDuration(client.uptime);
+    const createdAt = `<t:${client.user.createdTimestamp}:R>`
+    const users = client.guilds.cache.reduce((a, g) => a + g.memberCount, 0);
 
-    const embed = bot.say.baseEmbed(interaction)
-      .setAuthor(`${bot.user.username}’s Information`, bot.user.displayAvatarURL())
+    const embed = client.say.baseEmbed(interaction)
+      .setAuthor(`${client.user.username}’s Information`, client.user.displayAvatarURL())
       .addField("General Info",
-        `**Bot Id:** ${bot.user.id}
-        **Bot Tag:** ${bot.user.tag}
+        `**Bot Id:** ${client.user.id}
+        **Bot Tag:** ${client.user.tag}
         **Created At :** ${createdAt}
         **Developer:** [ICY#7784](https:\/\/github.com\/not1cyyy)
         **Github Repo:** __[not1cyyy/Lynnophilia](https:\/\/github.com\/not1cyyy/Lynnophilia)__
         **Prefix:** \/`
       )
-      .addField("Bot Stats",
+      .addField("client Stats",
         `**Users:** ${util.formatNumber(users)}
-        **Servers:** ${util.formatNumber(bot.guilds.cache.size)}
-        **Channels:** ${util.formatNumber(bot.channels.cache.size)}
-        **Command Count:** ${util.formatNumber(bot.commands.size)}`
+        **Servers:** ${util.formatNumber(client.guilds.cache.size)}
+        **Channels:** ${util.formatNumber(client.channels.cache.size)}`
       )
       .addField("System Info",
         `**RAM Usage:**  ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB
-        **Bot Uptime:** ${uptime}
+        **client Uptime:** ${uptime}
         **Node Version:** ${process.version}
         **Platform:** ${util.toCapitalize(process.platform)}`
       );
@@ -41,7 +40,7 @@ module.exports = {
     const button2 = new MessageButton()
       .setLabel("Invite")
       .setStyle("LINK")
-      .setURL(`https://discord.com/api/oauth2/authorize?client_id=${bot.user.id}&permissions=8&scope=applications.commands%20bot`);
+      .setURL(`https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=applications.commands%20bot`);
 
     const row = new MessageActionRow().addComponents([button1, button2]);
 
