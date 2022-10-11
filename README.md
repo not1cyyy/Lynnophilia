@@ -18,7 +18,8 @@ Just search up a song or playlist and I'll play it for you ~ ♪
 - /resume - Resumes the music
 - /shuffle - Shuffles the queue
 - /skip - Skips the current song
-- /skipto - Skips to a certain track #
+- /skipto - Skips to a certain track 
+- /looptrack - Loops the currently playing track
 
 
 ## 
