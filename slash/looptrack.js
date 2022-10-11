@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { QueueRepeatMode } = require("discord-player");
 
 module.exports = {
-    data: new SlashCommandBuilder().setName("looptrack").setDescription("loops over the currently playing track)"),
+    data: new SlashCommandBuilder().setName("looptrack").setDescription("loops over the currently playing track"),
 
     run: async ({ client, interaction }) => {
 
