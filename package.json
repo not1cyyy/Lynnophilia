@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@discordjs/builders": "^0.12.0",
-    "@discordjs/opus": "^0.5.3",
+    "@discordjs/opus": "github:discordjs/opus",
     "@discordjs/rest": "^0.3.0",
     "@discordjs/voice": "^0.8.0",
     "chalk": "^5.1.0",
