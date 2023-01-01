@@ -16,7 +16,7 @@ const Logger = require("./modules/Logger");
 const Embeds = require("./modules/Embeds");
 const Util = require("./modules/Util");
 
-// I'm really depressed
+// I'm really fucking depressed
 const client = new Discord.Client({
     intents: [
         "GUILDS",
